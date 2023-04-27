@@ -1,5 +1,8 @@
-import { StyleSheet } from 'react-native'
-import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions";
+import { StyleSheet } from 'react-native';
+import {
+    responsiveHeight,
+    responsiveWidth,
+} from 'react-native-responsive-dimensions';
 
 const styles = StyleSheet.create({
     viewCard: {
@@ -8,7 +11,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         alignSelf: 'center',
         borderRadius: 10,
-        shadowColor: "#000",
+        shadowColor: '#000',
         shadowOffset: {
             width: 0,
             height: 2,
@@ -17,23 +20,25 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
 
         elevation: 5,
-        marginBottom: responsiveHeight(2)
+        marginBottom: responsiveHeight(2),
     },
     imageCard: {
         width: responsiveWidth(88),
         height: responsiveHeight(26),
+    },
+    borderImageStyle: {
         borderTopEndRadius: 10,
-        borderTopLeftRadius: 10
+        borderTopLeftRadius: 10,
     },
     viewRowCard: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginLeft: responsiveWidth(2),
         marginRight: responsiveWidth(2),
-        marginTop: responsiveHeight(1.5)
+        marginTop: responsiveHeight(1.5),
     },
     viewLike: {
-        marginRight: responsiveWidth(7)
+        marginRight: responsiveWidth(7),
     },
     viewButton: {
         flexDirection: 'row',
@@ -41,9 +46,8 @@ const styles = StyleSheet.create({
         marginLeft: responsiveWidth(1),
     },
     viewPaddingRight: {
-        marginRight: responsiveWidth(2)
-    }
+        marginRight: responsiveWidth(2),
+    },
 });
 
-
-export default styles
+export default styles;
