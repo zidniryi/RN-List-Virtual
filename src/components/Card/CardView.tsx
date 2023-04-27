@@ -8,6 +8,12 @@ import CONSTANT from "../../constants/CONSTANT";
 
 const { TEXT, COLOR } = CONSTANT
 
+/**
+ * CardView Component
+ * 
+ * @param CardViewProps - props for CardView 
+ * @returns {JSX.Element}
+ */
 const CardView = ({ image, textCount = "0", onDislike, onLike }: CardViewProps): JSX.Element => {
     return (
         <View style={styles.viewCard}>
