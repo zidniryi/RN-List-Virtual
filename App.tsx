@@ -1,12 +1,12 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   StatusBar,
   StyleSheet,
   useColorScheme,
   View,
-  Image
+  FlatList
 } from 'react-native';
 import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions";
 
@@ -16,16 +16,94 @@ import {
 import Button from "./src/components/Button/Button";
 import CONSTANT from "./src/constants/CONSTANT";
 import CardView from "./src/components/Card/CardView";
+import CONSTANT_DATA from "./src/constants/CONSTANT_DATA";
 
 
 const { COLOR, TEXT } = CONSTANT
 
 function App(): JSX.Element {
+  const [dataListView, setDataListView] = useState(CONSTANT_DATA)
+
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  /**
+   * - On Like
+   * @param id {number} ID of list selected
+   * @returns {Array}
+   */
+  const onLikeCard = (id: number) => {
+    let updatedList = dataListView.map(item => {
+      // Add +1 if data found
+      if (item.id === id) {
+        return { ...item, count: item.count + 1 };
+      }
+      return item;
+    });
+
+    setDataListView(updatedList)
+  }
+
+  /**
+  * - On onLikeAllCard
+  * @param id {number} ID of list selected
+  * @returns {Array}
+  */
+  const onLikeAllCard = () => {
+    let updatedList = dataListView.map(item => {
+      return { ...item, count: item.count + 1 };
+    });
+    setDataListView(updatedList)
+  }
+
+  /**
+   * - On Dislike
+   * @param id {number} ID of list selected
+   * @returns {Array}
+   */
+  const onDislikeCard = (id: number) => {
+    let updatedList = dataListView.map(item => {
+      // Add -1 if data found
+      // and check if data less than zero to prevent negative number
+      if (item.id === id && item.count > 0) {
+        return { ...item, count: item.count - 1 };
+      }
+      return item; // else return unmodified item 
+    });
+
+    setDataListView(updatedList)
+  }
+
+  /**
+  * - On onDisslikeAllCard
+  * @param id {number} ID of list selected
+  * @returns {Array}
+  */
+  const onDisslikeAllCard = () => {
+    let updatedList = dataListView.map(item => {
+      // Prevent negative number
+      if (item.count > 0) {
+        return { ...item, count: item.count - 1 };
+      }
+      return item
+    });
+    setDataListView(updatedList)
+  }
+
+  /**
+   * - On Reset
+   * @param id {number} ID of list selected
+   * @returns {Array}
+   */
+  const onResetAll = () => {
+    let updatedList = dataListView.map(item => {
+      return { ...item, count: 0 };
+    });
+    setDataListView(updatedList)
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -34,17 +112,25 @@ function App(): JSX.Element {
         backgroundColor={backgroundStyle.backgroundColor}
       />
       <View style={styles.viewRow}>
-        <Button background={COLOR.PRIMARY} text={TEXT.LIKE_ALL} color="white" onPress={() => console.log("first")} />
-        <Button background={COLOR.DEFAULT} text={TEXT.RESET_ALL} color={COLOR.GREY} onPress={() => console.log("first")} />
-        <Button background={COLOR.DANGER} text={TEXT.DISLIKE_ALL} color={COLOR.DEFAULT} onPress={() => console.log("first")} />
+        <Button background={COLOR.PRIMARY} text={TEXT.LIKE_ALL} color={COLOR.DEFAULT} onPress={onLikeAllCard} />
+        <Button background={COLOR.DEFAULT} text={TEXT.RESET_ALL} color={COLOR.GREY} onPress={onResetAll} />
+        <Button background={COLOR.DANGER} text={TEXT.DISLIKE_ALL} color={COLOR.DEFAULT} onPress={onDisslikeAllCard} />
       </View>
-
       {/* Card */}
       <View style={styles.containerList}>
-        <CardView image="https://cdn.pixabay.com/photo/2023/04/23/19/29/daisies-7946594_1280.jpg" />
+        <FlatList
+          data={dataListView}
+          renderItem={({ item }) =>
+            <CardView
+              image={item.image}
+              textCount={item.count.toString()}
+              onDislike={() => onDislikeCard(item.id)}
+              onLike={() => onLikeCard(item.id)}
+            />
+          }
+          keyExtractor={item => item.id.toString()}
+        />
       </View>
-
-
     </SafeAreaView>
   );
 }
