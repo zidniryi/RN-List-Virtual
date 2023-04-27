@@ -14,6 +14,7 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 import Button from "./src/components/Button/Button";
+import CONSTANT from "./src/constants/CONSTANT";
 
 const CARD_DATA = [
   {
@@ -33,6 +34,8 @@ const CARD_DATA = [
   },
 ];
 
+const { COLOR, TEXT } = CONSTANT
+
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -47,9 +50,9 @@ function App(): JSX.Element {
         backgroundColor={backgroundStyle.backgroundColor}
       />
       <View style={styles.viewRow}>
-        <Button background="green" text="Hello" color="white" onPress={() => console.log("first")} />
-        <Button background="green" text="Hello" color="white" onPress={() => console.log("first")} />
-        <Button background="green" text="Hello" color="white" onPress={() => console.log("first")} />
+        <Button background={COLOR.PRIMARY} text={TEXT.LIKE_ALL} color="white" onPress={() => console.log("first")} />
+        <Button background={COLOR.DEFAULT} text={TEXT.RESET_ALL} color={COLOR.GREY} onPress={() => console.log("first")} />
+        <Button background={COLOR.DANGER} text={TEXT.DISLIKE_ALL} color={COLOR.DEFAULT} onPress={() => console.log("first")} />
       </View>
 
       {/* Card */}
@@ -81,7 +84,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginLeft: responsiveWidth(7),
-    marginRight: responsiveWidth(7)
+    marginRight: responsiveWidth(7),
+    marginTop: responsiveHeight(2)
   },
 
   containerList: {

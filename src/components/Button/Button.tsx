@@ -3,6 +3,10 @@ import React from 'react'
 
 import { ButtonPropsApp } from "./Button.d"
 import styles from "./Button.styles"
+import CONSTANT from "../../constants/CONSTANT"
+
+
+const { COLOR } = CONSTANT
 
 /**
  * Button Component
@@ -10,7 +14,7 @@ import styles from "./Button.styles"
  * @param ButtonPropsApp - is the props for Button Component 
  * @returns {JSX.Element }
  */
-const Button = ({ text, color = "white", background = "red", onPress, size = 'small' }: ButtonPropsApp): JSX.Element => {
+const Button = ({ text, color = COLOR.DEFAULT, background = COLOR.PRIMARY, onPress, size = 'small' }: ButtonPropsApp): JSX.Element => {
     return (
         <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
             <View style={[styles.button, { backgroundColor: background }]}>
