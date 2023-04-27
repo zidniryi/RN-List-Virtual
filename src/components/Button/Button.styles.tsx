@@ -3,11 +3,19 @@ import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimen
 
 const styles = StyleSheet.create({
     button: {
-        width: responsiveWidth(25),
         height: responsiveHeight(4),
         borderRadius: 8,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
     },
     textButton: {
         fontWeight: '400',

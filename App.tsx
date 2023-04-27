@@ -17,23 +17,6 @@ import Button from "./src/components/Button/Button";
 import CONSTANT from "./src/constants/CONSTANT";
 import CardView from "./src/components/Card/CardView";
 
-const CARD_DATA = [
-  {
-    id: 1,
-    image: 'First Item',
-    count: 10
-  },
-  {
-    id: 2,
-    image: 'First Item',
-    count: 10
-  },
-  {
-    id: 3,
-    image: 'First Item',
-    count: 10
-  },
-];
 
 const { COLOR, TEXT } = CONSTANT
 
@@ -58,9 +41,7 @@ function App(): JSX.Element {
 
       {/* Card */}
       <View style={styles.containerList}>
-        <CardView />
-        <CardView />
-        <CardView />
+        <CardView image="https://cdn.pixabay.com/photo/2023/04/23/19/29/daisies-7946594_1280.jpg" />
       </View>
 
 
