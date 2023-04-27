@@ -15,6 +15,7 @@ import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimen
 import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
+import Button from "./src/components/Button/Button";
 
 const CARD_DATA = [
   {
@@ -48,21 +49,9 @@ function App(): JSX.Element {
         backgroundColor={backgroundStyle.backgroundColor}
       />
       <View style={styles.viewRow}>
-        <TouchableOpacity activeOpacity={0.5}>
-          <View style={styles.button}>
-            <Text style={styles.textButton}>Like All</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.5}>
-          <View style={styles.button}>
-            <Text style={styles.textButton}>Like All</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.5}>
-          <View style={styles.button}>
-            <Text style={styles.textButton}>Like All</Text>
-          </View>
-        </TouchableOpacity>
+        <Button background="green" text="Hello" color="white" onPress={() => console.log("first")} />
+        <Button background="green" text="Hello" color="white" onPress={() => console.log("first")} />
+        <Button background="green" text="Hello" color="white" onPress={() => console.log("first")} />
       </View>
 
       {/* Card */}
@@ -71,68 +60,10 @@ function App(): JSX.Element {
           <Image style={styles.imageCard} source={{ uri: "https://cdn.pixabay.com/photo/2023/04/23/19/29/daisies-7946594_1280.jpg" }} />
           <View style={styles.viewRowCard}>
             <View style={styles.viewLike}>
-              <TouchableOpacity activeOpacity={0.5}>
-                <View style={styles.button}>
-                  <Text style={styles.textButton}>Like All</Text>
-                </View>
-              </TouchableOpacity>
+              <Button background="green" text="Hello" color="white" onPress={() => console.log("first")} />
             </View>
-            <TouchableOpacity activeOpacity={0.5}>
-              <View style={styles.button}>
-                <Text style={styles.textButton}>Like All</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.5}>
-              <View style={styles.button}>
-                <Text style={styles.textButton}>Like All</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        <View style={styles.viewCard}>
-          <Image style={styles.imageCard} source={{ uri: "https://cdn.pixabay.com/photo/2023/04/23/19/29/daisies-7946594_1280.jpg" }} />
-          <View style={styles.viewRowCard}>
-            <View style={styles.viewLike}>
-              <TouchableOpacity activeOpacity={0.5}>
-                <View style={styles.button}>
-                  <Text style={styles.textButton}>Like All</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-            <TouchableOpacity activeOpacity={0.5}>
-              <View style={styles.button}>
-                <Text style={styles.textButton}>Like All</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.5}>
-              <View style={styles.button}>
-                <Text style={styles.textButton}>Like All</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        <View style={styles.viewCard}>
-          <Image style={styles.imageCard} source={{ uri: "https://cdn.pixabay.com/photo/2023/04/23/19/29/daisies-7946594_1280.jpg" }} />
-          <View style={styles.viewRowCard}>
-            <View style={styles.viewLike}>
-              <TouchableOpacity activeOpacity={0.5}>
-                <View style={styles.button}>
-                  <Text style={styles.textButton}>Like All</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-            <TouchableOpacity activeOpacity={0.5}>
-              <View style={styles.button}>
-                <Text style={styles.textButton}>Like All</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.5}>
-              <View style={styles.button}>
-                <Text style={styles.textButton}>Like All</Text>
-              </View>
-            </TouchableOpacity>
+            <Button background="green" text="Hello" color="white" onPress={() => console.log("first")} />
+            <Button background="green" text="Hello" color="white" onPress={() => console.log("first")} />
           </View>
         </View>
       </View>
