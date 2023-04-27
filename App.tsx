@@ -6,8 +6,6 @@ import {
   StyleSheet,
   useColorScheme,
   View,
-  Text,
-  TouchableOpacity,
   Image
 } from 'react-native';
 import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions";
@@ -85,18 +83,7 @@ const styles = StyleSheet.create({
     marginLeft: responsiveWidth(7),
     marginRight: responsiveWidth(7)
   },
-  button: {
-    width: responsiveWidth(25),
-    height: responsiveHeight(4),
-    backgroundColor: 'blue',
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  textButton: {
-    fontWeight: '600',
-    color: 'white'
-  },
+
   containerList: {
     marginTop: responsiveHeight(2),
   },
