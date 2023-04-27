@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#F4F4F4',
-        marginTop: responsiveHeight(10),
+        marginTop: responsiveHeight(1),
     },
     viewRow: {
         flexDirection: 'row',
@@ -164,6 +164,7 @@ const styles = StyleSheet.create({
     },
 
     containerList: {
+        flex: 1,
         marginTop: responsiveHeight(2),
         marginBottom: responsiveHeight(2),
     },
