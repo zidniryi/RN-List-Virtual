@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
     SafeAreaView,
     StatusBar,
@@ -17,6 +17,8 @@ import CONSTANT from '../constants/CONSTANT';
 import CONSTANT_DATA from '../constants/CONSTANT_DATA';
 import Button from '../components/Button/Button';
 import CardView from '../components/Card/CardView';
+import { CardViewProps } from "../components/Card/CardView.d";
+import styles from "./ListApp.styles";
 
 const { COLOR, TEXT } = CONSTANT;
 
@@ -35,15 +37,16 @@ function ListApp(): JSX.Element {
      * @returns {Array}
      */
     const onLikeCard = (id: number) => {
-        let updatedList = dataListView.map(item => {
-            // Add +1 if data found
-            if (item.id === id) {
-                return { ...item, count: item.count + 1 };
-            }
-            return item;
-        });
-
-        setDataListView(updatedList);
+        return () => {
+            setDataListView(prevList => {
+                return prevList.map(item => {
+                    if (item.id === id) {
+                        return { ...item, count: item.count + 1 };
+                    }
+                    return item;
+                });
+            });
+        };
     };
 
     /**
@@ -64,16 +67,16 @@ function ListApp(): JSX.Element {
      * @returns {Array}
      */
     const onDislikeCard = (id: number) => {
-        let updatedList = dataListView.map(item => {
-            // Add -1 if data found
-            // and check if data less than zero to prevent negative number
-            if (item.id === id && item.count > 0) {
-                return { ...item, count: item.count - 1 };
-            }
-            return item; // else return unmodified item
-        });
-
-        setDataListView(updatedList);
+        return () => {
+            setDataListView(prevList => {
+                return prevList.map(item => {
+                    if (item.id === id && item.count > 0) {
+                        return { ...item, count: item.count - 1 };
+                    }
+                    return item;
+                });
+            });
+        };
     };
 
     /**
@@ -103,6 +106,21 @@ function ListApp(): JSX.Element {
         });
         setDataListView(updatedList);
     };
+    /**
+     * Render Item For Callback Perevent Re Render
+     */
+    const renderItem = useCallback(({ item }: any) => (
+        <CardView
+            image={item.image}
+            textCount={item.count.toString()}
+            // Use highorder function that return another function avoid anonymous function
+            onDislike={onDislikeCard(item.id)}
+            onLike={onLikeCard(item.id)}
+            key={item.id.toString()}
+        />
+    ), []);
+
+    console.log("Main App Iten")
 
     return (
         <SafeAreaView style={styles.container}>
@@ -134,14 +152,7 @@ function ListApp(): JSX.Element {
             <View style={styles.containerList}>
                 <FlatList
                     data={dataListView}
-                    renderItem={({ item }) => (
-                        <CardView
-                            image={item.image}
-                            textCount={item.count.toString()}
-                            onDislike={() => onDislikeCard(item.id)}
-                            onLike={() => onLikeCard(item.id)}
-                        />
-                    )}
+                    renderItem={renderItem}
                     keyExtractor={item => item.id.toString()}
                 />
             </View>
@@ -149,25 +160,8 @@ function ListApp(): JSX.Element {
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#F4F4F4',
-        marginTop: responsiveHeight(1),
-    },
-    viewRow: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginLeft: responsiveWidth(7),
-        marginRight: responsiveWidth(7),
-        marginTop: responsiveHeight(2),
-    },
 
-    containerList: {
-        flex: 1,
-        marginTop: responsiveHeight(2),
-        marginBottom: responsiveHeight(2),
-    },
-});
+
+
 
 export default ListApp;

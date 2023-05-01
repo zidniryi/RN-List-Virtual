@@ -1,5 +1,5 @@
 import { View, ImageBackground } from 'react-native';
-import React from 'react';
+import React, { memo } from 'react';
 
 import Button from '../Button/Button';
 import styles from './CardView.styles';
@@ -9,17 +9,24 @@ import CONSTANT from '../../constants/CONSTANT';
 const { TEXT, COLOR } = CONSTANT;
 
 /**
- * CardView Component
+ * CardView Component Memo prevent re
  *
  * @param CardViewProps - props for CardView
  * @returns {JSX.Element}
  */
-const CardView = ({
+
+function propsAreEqual(prevprops: any, nextProps: any) {
+    return JSON.stringify(prevprops) === JSON.stringify(nextProps)
+}
+
+// Use memo for prevent rerender data 
+const CardView = React.memo(({
     image,
     textCount = '0',
     onDislike,
     onLike,
-}: CardViewProps): JSX.Element => {
+}: CardViewProps) => {
+    console.log('render Cardview Now Just One Time')
     return (
         <View style={styles.viewCard}>
             <ImageBackground
@@ -59,7 +66,9 @@ const CardView = ({
                 </View>
             </View>
         </View>
-    );
-};
+    )
+}, propsAreEqual);
+
+
 
 export default CardView;
